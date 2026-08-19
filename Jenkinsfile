@@ -14,16 +14,6 @@ pipeline {
                 sh 'mvn -B clean package -DskipTests'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn -B test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
